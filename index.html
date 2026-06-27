@@ -3,1299 +3,712 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIERUBA Index｜共通認識力 自己診断</title>
+<title>MIERUBA INDEX｜共通認識力 自己診断</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #0f1740;
-    --navy-mid: #1a2560;
-    --blue: #2b4acb;
-    --blue-light: #4a6ef5;
-    --amber: #f59e0b;
-    --amber-light: #fbbf24;
-    --gray-bg: #f4f6fb;
-    --gray-card: #ffffff;
-    --gray-border: #e2e8f0;
-    --text-primary: #0f1740;
-    --text-secondary: #64748b;
-    --text-light: #94a3b8;
-    --cat1: #3b82f6;
-    --cat2: #8b5cf6;
-    --cat3: #10b981;
-    --cat4: #f59e0b;
-    --cat5: #ef4444;
-    --cat6: #ec4899;
-    --radius: 16px;
-    --shadow: 0 4px 24px rgba(15,23,64,0.10);
-    --shadow-lg: 0 8px 40px rgba(15,23,64,0.16);
+    --teal:       #1A6B6B;
+    --teal-dark:  #134f4f;
+    --teal-mid:   #1e7e7e;
+    --teal-light: #2a9d9d;
+    --teal-pale:  #e8f4f4;
+    --gold:       #C8963E;
+    --gold-light: #e0ac56;
+    --gold-pale:  #fdf3e3;
+    --white:      #ffffff;
+    --off-white:  #f7f9f9;
+    --gray-100:   #f0f4f4;
+    --gray-200:   #dce8e8;
+    --gray-400:   #8faaa8;
+    --gray-600:   #4a6b6a;
+    --text:       #1a2e2e;
+    --text-mid:   #3d5c5b;
+    --text-soft:  #6b8a89;
+    --cat1: #2a9d9d;
+    --cat2: #7b6fbf;
+    --cat3: #3ba07a;
+    --cat4: #c8963e;
+    --cat5: #c85a3e;
+    --cat6: #b05a8e;
+    --radius-sm: 8px;
+    --radius:    16px;
+    --radius-lg: 24px;
+    --shadow-sm: 0 2px 12px rgba(26,107,107,0.08);
+    --shadow:    0 4px 24px rgba(26,107,107,0.12);
+    --shadow-lg: 0 8px 48px rgba(26,107,107,0.18);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
-    background: var(--gray-bg);
-    color: var(--text-primary);
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
     min-height: 100vh;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
-  /* ─── Header ─── */
+  /* ── Header ── */
   .site-header {
-    background: var(--navy);
-    padding: 0 24px;
-    height: 56px;
+    background: var(--white);
+    border-bottom: 2px solid var(--teal-pale);
+    padding: 0 28px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
+    box-shadow: 0 2px 16px rgba(26,107,107,0.06);
   }
-  .logo {
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 0.04em;
+  .logo-wrap { display: flex; align-items: center; gap: 10px; }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--teal);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900;
+    color: var(--white);
   }
-  .logo span { color: var(--amber); }
+  .logo-text { font-size: 17px; font-weight: 900; color: var(--teal-dark); letter-spacing: 0.06em; }
+  .logo-text span { color: var(--gold); }
+  .header-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--teal); background: var(--teal-pale);
+    padding: 4px 12px; border-radius: 99px; text-transform: uppercase;
+  }
 
-  /* ─── Progress Bar ─── */
+  /* ── Progress ── */
   .progress-wrap {
-    background: var(--navy-mid);
-    padding: 10px 24px;
-    position: sticky;
-    top: 56px;
-    z-index: 99;
+    background: var(--teal-dark);
+    padding: 10px 28px;
+    position: sticky; top: 60px; z-index: 199;
     display: none;
   }
   .progress-wrap.visible { display: block; }
-  .progress-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 6px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .progress-bar-bg {
-    background: rgba(255,255,255,0.15);
-    border-radius: 99px;
-    height: 6px;
-    overflow: hidden;
-  }
+  .progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .progress-label { font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; }
+  .progress-pct { font-size: 11px; color: var(--gold-light); font-weight: 700; }
+  .progress-bar-bg { background: rgba(255,255,255,0.15); border-radius: 99px; height: 5px; overflow: hidden; }
   .progress-bar-fill {
-    background: linear-gradient(90deg, var(--amber), var(--amber-light));
-    height: 100%;
-    border-radius: 99px;
-    transition: width 0.4s ease;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    height: 100%; border-radius: 99px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
   }
-  .progress-steps {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-  }
+  .progress-steps { display: flex; gap: 6px; margin-top: 8px; }
   .progress-step {
-    font-size: 10px;
-    color: rgba(255,255,255,0.4);
-    flex: 1;
-    text-align: center;
-    transition: color 0.3s;
+    font-size: 10px; color: rgba(255,255,255,0.35);
+    flex: 1; text-align: center; transition: color 0.3s;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .progress-step.done { color: var(--amber-light); }
-  .progress-step.active { color: #fff; font-weight: 700; }
+  .progress-step.done { color: rgba(255,255,255,0.6); }
+  .progress-step.active { color: var(--gold-light); font-weight: 700; }
 
-  /* ─── Main Container ─── */
-  .container {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 32px 16px 80px;
-  }
-
-  /* ─── Screens ─── */
+  /* ── Container ── */
+  .container { max-width: 700px; margin: 0 auto; padding: 40px 16px 100px; }
   .screen { display: none; }
   .screen.active { display: block; }
 
-  /* ─── Intro Screen ─── */
+  /* ── Intro ── */
   .intro-hero {
+    background: linear-gradient(150deg, var(--teal-dark) 0%, var(--teal) 60%, var(--teal-mid) 100%);
+    border-radius: var(--radius-lg);
+    padding: 52px 36px 44px;
     text-align: center;
-    padding: 48px 24px 40px;
-    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
-    border-radius: var(--radius);
-    color: #fff;
-    margin-bottom: 24px;
+    color: var(--white);
+    margin-bottom: 28px;
     box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .intro-hero::before {
     content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 240px; height: 240px;
-    background: radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 70%);
-    border-radius: 50%;
+    position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(200,150,62,0.18) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
   }
-  .intro-badge {
-    display: inline-block;
-    background: rgba(245,158,11,0.2);
-    border: 1px solid rgba(245,158,11,0.4);
-    color: var(--amber-light);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    padding: 4px 14px;
-    border-radius: 99px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+  .intro-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(200,150,62,0.2); border: 1px solid rgba(200,150,62,0.4);
+    color: var(--gold-light); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; padding: 5px 16px; border-radius: 99px;
+    margin-bottom: 24px; text-transform: uppercase;
   }
-  .intro-hero h1 {
-    font-size: 32px;
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-  .intro-hero h1 span { color: var(--amber); }
-  .intro-hero p {
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
-    margin-top: 12px;
-  }
-  .intro-score-preview {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 4px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 10px 24px;
-    margin-top: 24px;
-  }
-  .intro-score-preview .big { font-size: 36px; font-weight: 900; color: var(--amber); }
-  .intro-score-preview .small { font-size: 16px; color: rgba(255,255,255,0.5); }
+  .intro-hero h1 { font-size: 34px; font-weight: 900; line-height: 1.25; margin-bottom: 6px; position: relative; z-index: 1; }
+  .intro-hero h1 em { font-style: normal; color: var(--gold-light); }
+  .intro-tagline { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 14px; position: relative; z-index: 1; letter-spacing: 0.04em; }
+  .intro-divider { width: 40px; height: 2px; background: rgba(255,255,255,0.2); margin: 20px auto; }
+  .intro-sub { font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 0.08em; position: relative; z-index: 1; }
+  .intro-sub strong { color: rgba(255,255,255,0.85); }
 
-  .intro-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  @media (max-width: 480px) { .intro-cards { grid-template-columns: 1fr; } }
+  .intro-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
+  @media(max-width:500px){ .intro-cards { grid-template-columns: 1fr; } }
   .intro-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 20px 16px;
-    box-shadow: var(--shadow);
-    text-align: center;
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius); padding: 22px 16px; text-align: center;
+    box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s;
   }
+  .intro-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
   .intro-card-icon { font-size: 28px; margin-bottom: 10px; }
   .intro-card-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .intro-card-desc { font-size: 11px; color: var(--text-secondary); }
+  .intro-card-desc { font-size: 11px; color: var(--text-soft); }
 
   .intro-info {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 24px;
-    box-shadow: var(--shadow);
-    margin-bottom: 28px;
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius); padding: 24px 28px;
+    margin-bottom: 28px; box-shadow: var(--shadow-sm);
   }
-  .intro-info h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
-  .intro-info ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .intro-info li {
-    font-size: 13px;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .intro-info-title {
+    font-size: 13px; font-weight: 700; color: var(--teal);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
   }
-  .intro-info li::before {
-    content: '✓';
-    color: var(--blue);
-    font-weight: 700;
-    flex-shrink: 0;
-  }
+  .intro-info-title::before { content: ''; display: block; width: 3px; height: 14px; background: var(--teal); border-radius: 2px; }
+  .intro-info ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .intro-info li { font-size: 13px; color: var(--text-mid); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .chk { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--teal-pale); color: var(--teal); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
 
-  /* ─── Buttons ─── */
+  /* ── Buttons ── */
   .btn-primary {
-    display: block;
-    width: 100%;
-    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 32px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    transition: all 0.2s;
-    box-shadow: 0 4px 16px rgba(43,74,203,0.4);
+    display: block; width: 100%;
+    background: var(--teal); color: var(--white);
+    border: none; border-radius: var(--radius-sm);
+    padding: 17px 32px; font-size: 15px; font-weight: 700;
+    cursor: pointer; letter-spacing: 0.06em;
+    transition: all 0.2s; font-family: inherit;
+    box-shadow: 0 4px 20px rgba(26,107,107,0.3);
   }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(43,74,203,0.5); }
+  .btn-primary:hover { background: var(--teal-mid); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(26,107,107,0.4); }
   .btn-primary:active { transform: translateY(0); }
-  .btn-primary:disabled {
-    background: var(--gray-border);
-    color: var(--text-light);
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
+  .btn-primary:disabled { background: var(--gray-200); color: var(--gray-400); box-shadow: none; cursor: not-allowed; transform: none; }
+  .btn-ghost {
+    background: none; color: var(--teal);
+    border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+    padding: 15px 24px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; font-family: inherit;
   }
-
-  .btn-secondary {
-    background: #fff;
-    color: var(--text-secondary);
-    border: 1px solid var(--gray-border);
-    border-radius: 12px;
-    padding: 14px 28px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-secondary:hover { background: var(--gray-bg); }
-
+  .btn-ghost:hover { border-color: var(--teal); background: var(--teal-pale); }
   .btn-row { display: flex; gap: 12px; margin-top: 24px; }
-  .btn-row .btn-secondary { flex: 0 0 auto; }
+  .btn-row .btn-ghost { flex: 0 0 auto; }
   .btn-row .btn-primary { flex: 1; }
 
-  /* ─── Question Screen ─── */
+  /* ── Questions ── */
   .q-header {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 16px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 16px;
+    box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 18px;
   }
-  .q-cat-icon {
-    width: 52px; height: 52px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    flex-shrink: 0;
-  }
-  .q-cat-meta { flex: 1; }
-  .q-cat-badge {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .q-cat-name { font-size: 20px; font-weight: 800; }
-  .q-cat-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+  .q-cat-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+  .q-cat-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+  .q-cat-name { font-size: 20px; font-weight: 900; }
+  .q-cat-desc { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
 
-  .scale-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    color: var(--text-light);
-    padding: 0 4px;
-    margin-bottom: 4px;
-  }
+  .scale-legend { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-soft); padding: 0 2px; margin-bottom: 6px; font-weight: 500; }
 
   .q-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 12px;
-    box-shadow: var(--shadow);
+    background: var(--white); border: 1px solid var(--gray-200);
+    border-radius: var(--radius); padding: 22px; margin-bottom: 12px;
+    box-shadow: var(--shadow-sm); transition: border-color 0.2s;
   }
-  .q-text {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 14px;
-    line-height: 1.5;
-  }
-  .q-text::before {
-    content: '私は、';
-    color: var(--text-light);
-    font-weight: 400;
-  }
-  .scale-buttons {
-    display: flex;
-    gap: 8px;
-  }
+  .q-card.answered { border-color: var(--teal-pale); }
+  .q-prefix { font-size: 11px; color: var(--text-soft); font-weight: 500; margin-bottom: 6px; letter-spacing: 0.04em; }
+  .q-text { font-size: 14px; font-weight: 700; margin-bottom: 16px; line-height: 1.5; }
+  .scale-buttons { display: flex; gap: 8px; }
   .scale-btn {
-    flex: 1;
-    aspect-ratio: 1;
-    border: 2px solid var(--gray-border);
-    border-radius: 10px;
-    background: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-height: 52px;
+    flex: 1; height: 50px;
+    border: 2px solid var(--gray-200); border-radius: var(--radius-sm);
+    background: var(--white); font-size: 15px; font-weight: 700;
+    color: var(--gray-400); cursor: pointer; transition: all 0.15s; font-family: inherit;
+    display: flex; align-items: center; justify-content: center;
   }
-  .scale-btn:hover {
-    border-color: var(--blue-light);
-    color: var(--blue-light);
-    background: rgba(74,110,245,0.05);
-  }
-  .scale-btn.selected {
-    border-color: var(--active-color, var(--blue));
-    background: var(--active-color, var(--blue));
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(43,74,203,0.3);
-    transform: scale(1.05);
-  }
+  .scale-btn:hover { border-color: var(--active-color, var(--teal)); color: var(--active-color, var(--teal)); background: rgba(26,107,107,0.04); }
+  .scale-btn.selected { border-color: var(--active-color, var(--teal)); background: var(--active-color, var(--teal)); color: var(--white); box-shadow: 0 2px 10px rgba(26,107,107,0.25); transform: scale(1.06); }
 
-  /* ─── Results Screen ─── */
+  /* ── Results ── */
   .result-hero {
-    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
-    border-radius: var(--radius);
-    padding: 36px 28px;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(150deg, var(--teal-dark) 0%, var(--teal) 70%, var(--teal-mid) 100%);
+    border-radius: var(--radius-lg); padding: 44px 32px; text-align: center;
+    color: var(--white); margin-bottom: 24px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
   }
-  .result-hero::before {
-    content: '';
-    position: absolute;
-    bottom: -80px; left: -80px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .result-title-label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: var(--amber-light);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-  .result-mi-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 4px;
-  }
-  .result-score-big {
-    font-size: 64px;
-    font-weight: 900;
-    color: var(--amber);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .result-score-denom {
-    font-size: 22px;
-    color: rgba(255,255,255,0.4);
-    font-weight: 400;
-  }
-  .result-stars {
-    font-size: 24px;
-    margin: 12px 0 4px;
-    letter-spacing: 2px;
-  }
-  .result-rank {
-    display: inline-block;
-    background: rgba(245,158,11,0.2);
-    border: 1px solid rgba(245,158,11,0.4);
-    color: var(--amber-light);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px 16px;
-    border-radius: 99px;
-    margin-top: 8px;
-    letter-spacing: 0.08em;
-  }
+  .result-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(200,150,62,0.15) 0%, transparent 70%); border-radius: 50%; }
+  .result-eyebrow { font-size: 11px; letter-spacing: 0.16em; color: var(--gold-light); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; position: relative; z-index: 1; }
+  .result-mi-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 4px; position: relative; z-index: 1; }
+  .result-score-row { display: flex; align-items: baseline; justify-content: center; gap: 4px; position: relative; z-index: 1; }
+  .result-score-num { font-size: 72px; font-weight: 900; color: var(--gold-light); line-height: 1; letter-spacing: -0.03em; }
+  .result-score-denom { font-size: 22px; color: rgba(255,255,255,0.35); }
+  .result-stars { font-size: 22px; letter-spacing: 3px; margin: 12px 0 6px; position: relative; z-index: 1; }
+  .result-rank { display: inline-block; background: rgba(200,150,62,0.2); border: 1px solid rgba(200,150,62,0.4); color: var(--gold-light); font-size: 11px; font-weight: 700; padding: 4px 18px; border-radius: 99px; letter-spacing: 0.1em; position: relative; z-index: 1; }
 
-  .section-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-secondary);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin: 28px 0 12px;
-    padding-left: 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-title::before {
-    content: '';
-    display: inline-block;
-    width: 3px; height: 14px;
-    background: var(--blue);
-    border-radius: 2px;
-  }
+  .section-heading { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 32px 0 14px; display: flex; align-items: center; gap: 8px; }
+  .section-heading::before { content: ''; display: block; width: 3px; height: 14px; background: var(--teal); border-radius: 2px; }
 
-  .chart-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 28px 20px;
-    box-shadow: var(--shadow);
-    margin-bottom: 20px;
-  }
-  .chart-wrap {
-    max-width: 320px;
-    margin: 0 auto;
-  }
+  .chart-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 32px 24px; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
+  .chart-wrap { max-width: 300px; margin: 0 auto; }
 
-  .scores-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  @media (max-width: 360px) { .scores-grid { grid-template-columns: 1fr; } }
-  .score-item {
-    background: #fff;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .score-item-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .score-item-name { font-size: 12px; color: var(--text-secondary); margin-bottom: 2px; }
-  .score-item-val { font-size: 20px; font-weight: 800; }
-  .score-item-bar-bg {
-    height: 4px;
-    background: var(--gray-bg);
-    border-radius: 99px;
-    margin-top: 6px;
-    overflow: hidden;
-  }
-  .score-item-bar { height: 100%; border-radius: 99px; transition: width 0.8s ease; }
-  .score-item-inner { flex: 1; min-width: 0; }
+  .scores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  @media(max-width:360px){ .scores-grid { grid-template-columns: 1fr; } }
+  .score-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px; box-shadow: var(--shadow-sm); }
+  .score-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .score-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .score-name { font-size: 11px; color: var(--text-soft); font-weight: 500; }
+  .score-val { font-size: 22px; font-weight: 900; line-height: 1; }
+  .score-bar-bg { height: 4px; background: var(--gray-100); border-radius: 99px; margin-top: 8px; overflow: hidden; }
+  .score-bar { height: 100%; border-radius: 99px; transition: width 0.8s ease; }
 
   .type-card {
-    background: linear-gradient(135deg, var(--navy) 0%, #1e2f7a 100%);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 20px;
-    color: #fff;
-    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--teal-dark) 0%, #1a4a4a 100%);
+    border-radius: var(--radius); padding: 32px; margin-bottom: 24px;
+    color: var(--white); box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
   }
-  .type-label {
-    font-size: 11px;
-    color: var(--amber-light);
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
-  .type-name {
-    font-size: 28px;
-    font-weight: 900;
-    margin-bottom: 14px;
-    line-height: 1.2;
-  }
-  .type-name span { color: var(--amber); }
-  .type-desc {
-    font-size: 14px;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
+  .type-eyebrow { font-size: 10px; letter-spacing: 0.14em; color: var(--gold-light); font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+  .type-name { font-size: 28px; font-weight: 900; line-height: 1.2; margin-bottom: 16px; }
+  .type-name em { font-style: normal; color: var(--gold-light); }
+  .type-desc { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.8; margin-bottom: 20px; white-space: pre-wrap; }
   .type-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .type-tag {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.9);
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 99px;
-  }
+  .type-tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.85); font-size: 11px; padding: 4px 12px; border-radius: 99px; font-weight: 500; }
 
-  .analysis-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 24px;
-    box-shadow: var(--shadow);
-    margin-bottom: 16px;
-  }
-  .analysis-card h3 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .analysis-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-    color: var(--text-secondary);
-  }
-  .analysis-item-icon {
-    flex-shrink: 0;
-    width: 22px; height: 22px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    margin-top: 1px;
-  }
-  .ai-card {
-    background: linear-gradient(135deg, #f0f4ff 0%, #fef9ec 100%);
-    border: 1px solid var(--gray-border);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 20px;
-  }
-  .ai-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .ai-badge {
-    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 99px;
-    letter-spacing: 0.08em;
-  }
-  .ai-card-title { font-size: 15px; font-weight: 700; }
-  .ai-text {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--text-primary);
-    white-space: pre-wrap;
-  }
+  .analysis-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 26px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+  .analysis-card-title { font-size: 14px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .analysis-row { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.65; margin-bottom: 10px; color: var(--text-mid); }
+  .analysis-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 2px; }
 
-  .restart-area {
-    text-align: center;
-    padding-top: 8px;
-  }
-  .restart-btn {
-    background: none;
-    border: none;
-    color: var(--text-light);
-    font-size: 13px;
-    cursor: pointer;
-    text-decoration: underline;
-    padding: 8px;
-  }
-  .restart-btn:hover { color: var(--text-secondary); }
+  /* ── Academic ── */
+  .academic-intro { background: linear-gradient(135deg, var(--gold-pale) 0%, #fff8ee 100%); border: 1px solid rgba(200,150,62,0.25); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 14px; }
+  .academic-intro-title { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+  .academic-intro-text { font-size: 12px; color: var(--text-mid); line-height: 1.75; }
 
-  /* ─── Animations ─── */
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-in { animation: fadeSlideUp 0.4s ease forwards; }
+  .academic-accordion { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .academic-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .academic-toggle { display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer; user-select: none; background: none; border: none; width: 100%; text-align: left; font-family: inherit; transition: background 0.15s; }
+  .academic-toggle:hover { background: var(--gray-100); }
+  .academic-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .academic-toggle-text { flex: 1; }
+  .academic-cat-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .academic-cat-sub { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+  .academic-arrow { font-size: 11px; color: var(--text-soft); transition: transform 0.25s; }
+  .academic-item.open .academic-arrow { transform: rotate(180deg); }
+  .academic-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--gray-100); }
+  .academic-item.open .academic-body { display: block; }
 
-  @keyframes countUp {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .count-anim { animation: countUp 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  .theory-block { margin-top: 18px; }
+  .theory-title { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .theory-badge { font-size: 10px; background: var(--teal-pale); color: var(--teal); padding: 2px 8px; border-radius: 99px; font-weight: 700; }
+  .theory-text { font-size: 12px; color: var(--text-mid); line-height: 1.8; margin-bottom: 10px; }
+  .theory-ref { font-size: 10px; color: var(--text-soft); font-style: italic; padding-left: 10px; border-left: 2px solid var(--gray-200); line-height: 1.6; }
+
+  .score-context { margin-top: 16px; padding: 12px 14px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.7; }
+  .score-context.high { background: rgba(42,157,157,0.08); color: var(--teal-dark); border-left: 3px solid var(--teal); }
+  .score-context.mid  { background: rgba(200,150,62,0.08); color: #7a5a20; border-left: 3px solid var(--gold); }
+  .score-context.low  { background: rgba(200,90,62,0.08);  color: #7a3020; border-left: 3px solid #c85a3e; }
+
+  .ai-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+  .ai-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .ai-badge { background: var(--teal); color: var(--white); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.1em; }
+  .ai-title { font-size: 15px; font-weight: 700; }
+  .ai-text { font-size: 13px; line-height: 1.95; color: var(--text-mid); white-space: pre-wrap; }
+
+  .restart-area { text-align: center; padding-top: 12px; margin-bottom: 16px; }
+  .restart-btn { background: none; border: 1.5px solid var(--gray-200); color: var(--text-soft); font-size: 13px; cursor: pointer; padding: 10px 24px; border-radius: 99px; font-family: inherit; transition: all 0.2s; }
+  .restart-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+  .result-footer { text-align: center; font-size: 11px; color: var(--text-soft); padding: 16px 0 4px; border-top: 1px solid var(--gray-200); margin-top: 4px; }
+  .result-footer a { color: var(--teal); text-decoration: none; }
+  .result-footer a:hover { text-decoration: underline; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .anim { animation: fadeUp 0.45s ease forwards; }
+  .d1 { animation-delay: 0.05s; opacity: 0; }
+  .d2 { animation-delay: 0.10s; opacity: 0; }
+  .d3 { animation-delay: 0.15s; opacity: 0; }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="logo">MIERUBA<span>.</span></div>
-  <div style="font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.06em;">MIERUBA INDEX</div>
+  <div class="logo-wrap">
+    <div class="logo-mark">M</div>
+    <div class="logo-text">MIERUBA<span>.</span></div>
+  </div>
+  <div class="header-tag">MIERUBA INDEX</div>
 </header>
 
 <div class="progress-wrap" id="progressWrap">
-  <div class="progress-label">診断の進み具合</div>
-  <div class="progress-bar-bg">
-    <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+  <div class="progress-meta">
+    <span class="progress-label">STEP <span id="progressNum">1</span> / 6</span>
+    <span class="progress-pct" id="progressPct">0%</span>
   </div>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
   <div class="progress-steps" id="progressSteps"></div>
 </div>
 
 <div class="container">
 
-  <!-- ─── Intro Screen ─── -->
   <div class="screen active" id="screen-intro">
-    <div class="intro-hero animate-in">
-      <div class="intro-badge">MIERUBA INDEX</div>
-      <h1>共通認識力<br><span>自己診断</span></h1>
-      <p>あなたの「認識を揃える力」を6つの軸で測定します</p>
-      <div class="intro-score-preview">
-        <span class="big">MI</span>
-        <span class="small">score</span>
-      </div>
+    <div class="intro-hero anim">
+      <div class="intro-eyebrow">MIERUBA Index · 共通認識力診断</div>
+      <h1>あなたの<em>「見える力」</em>を<br>測定します</h1>
+      <div class="intro-tagline">あなたが見える。チームが見える。未来が見える。</div>
+      <div class="intro-divider"></div>
+      <div class="intro-sub"><strong>談議</strong>で理解を揃え、<strong>会議</strong>で未来を決める。</div>
     </div>
-
     <div class="intro-cards">
-      <div class="intro-card animate-in" style="animation-delay:0.1s">
-        <div class="intro-card-icon">👁</div>
-        <div class="intro-card-title">6つの能力</div>
-        <div class="intro-card-desc">見える力から共創力まで測定</div>
-      </div>
-      <div class="intro-card animate-in" style="animation-delay:0.15s">
-        <div class="intro-card-icon">📊</div>
-        <div class="intro-card-title">レーダーチャート</div>
-        <div class="intro-card-desc">自分の強み・弱みを可視化</div>
-      </div>
-      <div class="intro-card animate-in" style="animation-delay:0.2s">
-        <div class="intro-card-icon">🤖</div>
-        <div class="intro-card-title">タイプ診断</div>
-        <div class="intro-card-desc">5タイプで自分のスタイルを把握</div>
-      </div>
+      <div class="intro-card anim d1"><div class="intro-card-icon">📐</div><div class="intro-card-title">6つの軸で測定</div><div class="intro-card-desc">見える力から共創力まで</div></div>
+      <div class="intro-card anim d2"><div class="intro-card-icon">🎯</div><div class="intro-card-title">タイプ診断</div><div class="intro-card-desc">5タイプで自分のスタイルを把握</div></div>
+      <div class="intro-card anim d3"><div class="intro-card-icon">📚</div><div class="intro-card-title">学術的根拠</div><div class="intro-card-desc">理論に基づいた詳細な解説付き</div></div>
     </div>
-
-    <div class="intro-info animate-in" style="animation-delay:0.25s">
-      <h3>診断について</h3>
+    <div class="intro-info anim">
+      <div class="intro-info-title">診断について</div>
       <ul>
-        <li>全24問・約3〜5分で完了します</li>
-        <li>5段階評価（1〜5）で直感的に回答してください</li>
-        <li>現在のありのままの自分を評価してください</li>
-        <li>結果はMIERUBAスコア・レーダーチャート・タイプで表示されます</li>
+        <li><span class="chk">✓</span>全24問・約3〜5分で完了</li>
+        <li><span class="chk">✓</span>5段階評価（1〜5）で直感的に回答してください</li>
+        <li><span class="chk">✓</span>現在のありのままの自分を評価してください</li>
+        <li><span class="chk">✓</span>スコア・レーダーチャート・タイプ診断・学術解説で結果を表示します</li>
       </ul>
     </div>
-
-    <button class="btn-primary animate-in" style="animation-delay:0.3s" onclick="startDiagnosis()">
-      診断をはじめる →
-    </button>
+    <button class="btn-primary anim" onclick="startDiagnosis()">診断をはじめる →</button>
   </div>
 
-  <!-- ─── Question Screens (generated) ─── -->
   <div id="questionScreens"></div>
-
-  <!-- ─── Results Screen ─── -->
-  <div class="screen" id="screen-results">
-    <!-- filled by JS -->
-  </div>
+  <div class="screen" id="screen-results"></div>
 
 </div>
 
 <script>
-// ─────────────────────────────────────────
-//  Data
-// ─────────────────────────────────────────
-const CATEGORIES = [
+const CATS = [
   {
-    id: 'visibility',
-    name: '見える力',
-    nameEn: 'Visibility',
-    icon: '👁',
-    color: '#3b82f6',
-    bg: 'rgba(59,130,246,0.12)',
-    description: '現状を正しく認識できているか',
-    questions: [
-      '事実と解釈を分けて考えることができる',
-      '問題の本質を見つけることができる',
-      '情報を整理してわかりやすく伝えられる',
-      '状況を俯瞰して全体像を把握できる'
-    ]
+    id:'visibility', name:'見える力', nameEn:'Visibility', icon:'👁', color:'#2a9d9d', bg:'rgba(42,157,157,0.12)',
+    desc:'現状を正しく認識できているか',
+    qs:['事実と解釈を分けて考えることができる','問題の本質を見つけることができる','情報を整理してわかりやすく伝えられる','状況を俯瞰して全体像を把握できる'],
+    ac:{
+      t1:{name:'状況認識理論（Situational Awareness）',author:'Endsley, M. R. (1995)',badge:'認知科学',
+        text:'Endsley（1995）は状況認識を「環境内要素の知覚（Level 1）」「それらの意味の理解（Level 2）」「近い将来の予測（Level 3）」の3段階で定義しました。見える力が高い人は単なる情報収集にとどまらず、その意味を解釈し未来を予測します。',
+        ref:'Endsley, M. R. (1995). Toward a theory of situation awareness in dynamic systems. Human Factors, 37(1), 32–64.'},
+      t2:{name:'センスメイキング理論（Sensemaking）',author:'Weick, K. E. (1995)',badge:'組織論',
+        text:'Weick（1995）は、複雑・曖昧な状況において人がいかに意味を見出すかを説明しました。「事実と解釈を分ける」「俯瞰する」という能力はセンスメイキングの中核であり、組織内での共通認識形成の第一歩です。',
+        ref:'Weick, K. E. (1995). Sensemaking in Organizations. Sage Publications.'},
+      high:'あなたの見える力は高水準です。状況を的確に把握し事実と解釈を区別できるあなたは、談議における「共通の土台」を素早く構築できます。',
+      mid:'「なぜそう思うのか」を言語化する習慣をつけることで、状況認識の精度が高まります。',
+      low:'まず「事実」と「意見」を分けることを意識することから始めましょう。談議の質が大きく向上します。'
+    }
   },
   {
-    id: 'perspective',
-    name: '違いを認識する力',
-    nameEn: 'Perspective',
-    icon: '🔍',
-    color: '#8b5cf6',
-    bg: 'rgba(139,92,246,0.12)',
-    description: '他人との違いを理解できるか',
-    questions: [
-      '異なる意見を歓迎することができる',
-      '自分が正しいと思い込まないようにできる',
-      '相手の立場を理解しようとする',
-      '価値観の違いを受け入れることができる'
-    ]
+    id:'perspective', name:'違いを認識する力', nameEn:'Perspective', icon:'🔍', color:'#7b6fbf', bg:'rgba(123,111,191,0.12)',
+    desc:'他人との違いを理解できるか',
+    qs:['異なる意見を歓迎することができる','自分が正しいと思い込まないようにできる','相手の立場を理解しようとする','価値観の違いを受け入れることができる'],
+    ac:{
+      t1:{name:'認知多様性理論（Cognitive Diversity）',author:'Page, S. E. (2007)',badge:'行動経済学',
+        text:'Scott Page（2007）は「違いが重要」において、認知的に多様なグループは同質のグループよりも複雑な問題解決において優れた成果を出すことを示しました。違いを認識し歓迎できる力はチームのパフォーマンスを根本から引き上げます。',
+        ref:'Page, S. E. (2007). The Difference: How the Power of Diversity Creates Better Groups. Princeton University Press.'},
+      t2:{name:'視点取得（Perspective Taking）',author:'Epley & Caruso (2008)',badge:'社会心理学',
+        text:'Epley & Caruso（2008）は、他者の視点を意識的に取ることが相互理解を促進し協力行動を増加させることを示しました。「自分が正しいと思い込まない」という謙虚さは視点取得の実践であり、共通認識形成の根幹です。',
+        ref:'Epley, N., & Caruso, E. M. (2008). Perspective taking: Misstepping into others\' shoes. In Handbook of Imagination and Mental Simulation.'},
+      high:'他者の視点を尊重できるあなたは、多様な意見が混在する談議においても、それを「問題」ではなく「資産」として扱えます。',
+      mid:'反対意見に触れたとき「なぜ相手はそう考えるのか」を3秒間考える習慣が効果的です。',
+      low:'「自分とは違う意見にも一理ある」という前提で対話に臨んでみましょう。'
+    }
   },
   {
-    id: 'alignment',
-    name: '物差しを共有する力',
-    nameEn: 'Alignment',
-    icon: '⚖️',
-    color: '#10b981',
-    bg: 'rgba(16,185,129,0.12)',
-    description: '判断基準を合わせられるか',
-    questions: [
-      '判断基準を相手に説明することができる',
-      '優先順位をチームで共有できる',
-      '何を大事にするかを話し合うことができる',
-      '評価基準をすり合わせることができる'
-    ]
+    id:'alignment', name:'物差しを共有する力', nameEn:'Alignment', icon:'⚖️', color:'#3ba07a', bg:'rgba(59,160,122,0.12)',
+    desc:'判断基準を合わせられるか',
+    qs:['判断基準を相手に説明することができる','優先順位をチームで共有できる','何を大事にするかを話し合うことができる','評価基準をすり合わせることができる'],
+    ac:{
+      t1:{name:'共有メンタルモデル（Shared Mental Models）',author:'Cannon-Bowers et al. (1993)',badge:'組織心理学',
+        text:'Cannon-Bowers et al.（1993）は、チームメンバーが課題・チーム・状況について共通の認知モデルを持つことが高パフォーマンスなチームワークの基盤であることを示しました。物差しを共有する力はまさにShared Mental Modelsの形成能力です。',
+        ref:'Cannon-Bowers, J. A., Salas, E., & Converse, S. (1993). Shared mental models in expert team decision making. In Individual and Group Decision Making.'},
+      t2:{name:'価値整合性（Value Alignment）',author:'Kristof, A. L. (1996)',badge:'組織行動学',
+        text:'価値整合性とは個人とチームの価値観・判断基準が一致している程度を指します。Kristof（1996）は価値整合性の高いチームは意思決定の速度と質が共に向上することを示しました。優先順位の共有はその実践です。',
+        ref:'Kristof, A. L. (1996). Person-organization fit: An integrative review. Personnel Psychology, 49(1), 1–49.'},
+      high:'判断基準を明確に共有できるあなたは、談議を「感覚の擦り合わせ」から「論理的合意」へと引き上げる力を持っています。',
+      mid:'「私がこれを重要だと思う理由は〇〇です」という表現を意識的に使ってみましょう。',
+      low:'まずは「自分がどんな基準で判断しているか」を言語化することから始めてみましょう。'
+    }
   },
   {
-    id: 'dialogue',
-    name: '談議力',
-    nameEn: 'Dialogue',
-    icon: '💬',
-    color: '#f59e0b',
-    bg: 'rgba(245,158,11,0.12)',
-    description: '対話で共通認識を形成できるか',
-    questions: [
-      '相手の話を最後まで聴くことができる',
-      '適切な質問をすることができる',
-      '話の内容を要約することができる',
-      '全員が発言できる場をつくることができる'
-    ]
+    id:'dialogue', name:'談議力', nameEn:'Dialogue', icon:'💬', color:'#c8963e', bg:'rgba(200,150,62,0.12)',
+    desc:'対話で共通認識を形成できるか',
+    qs:['相手の話を最後まで聴くことができる','適切な質問をすることができる','話の内容を要約することができる','全員が発言できる場をつくることができる'],
+    ac:{
+      t1:{name:'ダイアローグ理論（On Dialogue）',author:'Bohm, D. (1996)',badge:'対話哲学',
+        text:'物理学者David Bohm（1996）は「談議（Dialogue）」を「討論（Discussion）」と明確に区別しました。討論は勝敗を争うのに対し、談議は参加者が共に意味を探求し新しい理解を共同構築するプロセスです。MIERUBAが定義する「談議」はまさにこの概念です。',
+        ref:'Bohm, D. (1996). On Dialogue. Routledge. (日本語訳：金井真弓訳『ダイアローグ』英治出版, 2007)'},
+      t2:{name:'心理的安全性（Psychological Safety）',author:'Edmondson, A. C. (1999)',badge:'組織行動学',
+        text:'Edmondson（1999）はGoogleの「プロジェクトAristotle」でも実証された心理的安全性を提唱しました。「全員が発言できる場をつくる」という能力は心理的安全性の最も直接的な実践であり、談議の質を決定する根本的要素です。',
+        ref:'Edmondson, A. C. (1999). Psychological safety and learning behavior in work teams. Administrative Science Quarterly, 44(2), 350–383.'},
+      high:'談議の場を設計・促進できるあなたは、MIERUBAが目指す「共通認識を形成する対話」の担い手です。',
+      mid:'相手が話し終えてから3秒待ってから話す「3秒ルール」を試してみましょう。',
+      low:'「なぜそう思うのか聞いてもいいですか？」という一言から談議が始まります。'
+    }
   },
   {
-    id: 'decision',
-    name: '意思決定力',
-    nameEn: 'Decision',
-    icon: '⚡',
-    color: '#ef4444',
-    bg: 'rgba(239,68,68,0.12)',
-    description: '合意形成・決断ができるか',
-    questions: [
-      '結論を明確にすることができる',
-      '次に取るべき行動を決めることができる',
-      '役割と担当者を明確にできる',
-      '期限を設定して合意できる'
-    ]
+    id:'decision', name:'意思決定力', nameEn:'Decision', icon:'⚡', color:'#c85a3e', bg:'rgba(200,90,62,0.12)',
+    desc:'合意形成・決断ができるか',
+    qs:['結論を明確にすることができる','次に取るべき行動を決めることができる','役割と担当者を明確にできる','期限を設定して合意できる'],
+    ac:{
+      t1:{name:'集合知理論（The Wisdom of Crowds）',author:'Surowiecki, J. (2004)',badge:'集合知',
+        text:'Surowiecki（2004）は、多様な意見を集約した集合的判断が専門家個人の判断を凌駕することを示しました。ただしこれが機能するには「多様性・独立性・分散化・集約の仕組み」が必要です。意思決定力はこれらを整え集合知を実際の決定に変換する能力です。',
+        ref:'Surowiecki, J. (2004). The Wisdom of Crowds. Doubleday. (日本語訳：『みんなの意見は案外正しい』角川書店)'},
+      t2:{name:'Vroomの意思決定スタイル理論',author:'Vroom & Yetton (1973)',badge:'経営学',
+        text:'Vroom & Yetton（1973）は、状況に応じた最適な意思決定スタイル（独裁型〜完全参加型）のモデルを提唱しました。「結論を明確にする」「行動・役割・期限を決める」という能力は、どのスタイルを選択しても共通して必要な実行力です。',
+        ref:'Vroom, V. H., & Yetton, P. W. (1973). Leadership and Decision-Making. University of Pittsburgh Press.'},
+      high:'明確な決断と行動への落とし込みが得意なあなたは、談議で生まれた共通認識を「実行」へと変換する重要な役割を担います。',
+      mid:'「決め方を決めること」から始めましょう。期限だけでも先に共有する習慣が効果的です。',
+      low:'「今日の議論で決まったことは〇〇です」と会の最後にまとめる習慣が意思決定力向上の第一歩です。'
+    }
   },
   {
-    id: 'coCreation',
-    name: '共創力',
-    nameEn: 'Co-Creation',
-    icon: '✨',
-    color: '#ec4899',
-    bg: 'rgba(236,72,153,0.12)',
-    description: '新しい価値を生み出せるか',
-    questions: [
-      '他人のアイデアを発展させることができる',
-      '新しい発想を積極的に歓迎できる',
-      '失敗を恐れずに挑戦することができる',
-      '未来志向で物事を考えることができる'
-    ]
+    id:'coCreation', name:'共創力', nameEn:'Co-Creation', icon:'✨', color:'#b05a8e', bg:'rgba(176,90,142,0.12)',
+    desc:'新しい価値を生み出せるか',
+    qs:['他人のアイデアを発展させることができる','新しい発想を積極的に歓迎できる','失敗を恐れずに挑戦することができる','未来志向で物事を考えることができる'],
+    ac:{
+      t1:{name:'価値共創（Co-creation）',author:'Prahalad & Ramaswamy (2004)',badge:'経営戦略',
+        text:'Prahalad & Ramaswamy（2004）は、価値は企業が一方的に創造するのではなくパートナーとの対話と相互作用を通じて「共創」されると主張しました。チームにおける共創力は対話から新しい価値を生み出す能力です。',
+        ref:'Prahalad, C. K., & Ramaswamy, V. (2004). The Future of Competition: Co-Creating Unique Value with Customers. Harvard Business School Press.'},
+      t2:{name:'グループ天才理論（Group Genius）',author:'Sawyer, R. K. (2007)',badge:'創造性研究',
+        text:'Sawyer（2007）は、画期的なイノベーションは天才個人からではなくグループの対話と協働から生まれることを主張しました。「他人のアイデアを発展させる」「失敗を恐れない」という態度はグループ天才を発現させるための必要条件です。',
+        ref:'Sawyer, R. K. (2007). Group Genius: The Creative Power of Collaboration. Basic Books.'},
+      high:'新しい価値を対話から生み出せるあなたは、MIERUBAが目指す「談議から生まれるイノベーション」を体現しています。',
+      mid:'「Yes, and...（そうですね、さらに〜）」という対話法でアイデアを発展させることが有効です。',
+      low:'「批判しない会議」を1回実験してみましょう。どんな意見も受け入れるだけで場の創造性は大きく変わります。'
+    }
   }
 ];
 
 const TYPES = [
-  {
-    id: 'facilitator',
-    name: 'ファシリテーター型',
-    emoji: '🎯',
-    condition: (s) => s.dialogue >= 3.5 && s.visibility >= 3.5,
-    tags: ['状況把握', '場の設計', '対話促進', '全体調整'],
-    desc: `あなたは状況を正確に把握しながら、全員が発言できる場を自然につくり出すことができます。\n\n意見の違いを見える化し、対話を通じて共通認識を形成する。これがあなたの最大の強みです。チームの「談議」を成功させる中心的な役割を果たします。`,
-    strengths: ['現場の状況を素早く把握できる', '場の空気を読んで対話を導ける', '全員の意見を引き出す力がある'],
-    weaknesses: ['自分の意見を主張するのが苦手な場合がある', '調整に時間がかかることがある'],
-    role: 'チームの対話を設計・推進する調整役',
-    advice: '自分の判断軸も明確にし、必要なときに積極的に意思決定に関与することで、さらにチームへの貢献が高まります。'
-  },
-  {
-    id: 'innovator',
-    name: 'イノベーター型',
-    emoji: '🚀',
-    condition: (s) => s.coCreation >= 3.5 && s.perspective >= 3.5,
-    tags: ['多様性尊重', 'アイデア発想', '変革推進', '未来志向'],
-    desc: `あなたは多様な視点を取り入れながら、新しい価値を創造することが得意です。\n\n違いを「問題」ではなく「資産」として捉え、それを融合させることで、誰も考えつかなかったアイデアを生み出す力があります。チームに新しい風を吹き込む存在です。`,
-    strengths: ['多様な意見をアイデアに転換できる', '固定観念にとらわれない発想ができる', '変化を恐れずチャレンジできる'],
-    weaknesses: ['アイデアが先行して実行が追いつかないことがある', '意思決定の優先度付けが課題になることがある'],
-    role: 'チームに新しい発想と可能性をもたらすアイデアリーダー',
-    advice: '生み出したアイデアをアライメント（物差し共有）でしっかり合わせることで、チームが一体となって実行に移せるようになります。'
-  },
-  {
-    id: 'strategist',
-    name: '戦略的リーダー型',
-    emoji: '🏆',
-    condition: (s) => s.decision >= 3.5 && s.alignment >= 3.5,
-    tags: ['合意形成', '判断力', '目標設定', 'チームマネジメント'],
-    desc: `あなたは判断基準を明確にし、チームを意思決定へと導く力があります。\n\n「何を大切にするか」を揃え、そこから逆算して行動を決める。あなたのリーダーシップはチームに方向性と安心感を与えます。会議を生産的に動かす推進力がある人物です。`,
-    strengths: ['判断基準を明確にして共有できる', '優先順位の設定が得意', '決定事項を行動につなげられる'],
-    weaknesses: ['議論を急ぎすぎることがある', '多様な意見を取り込む時間が不足することがある'],
-    role: '方向性を定めてチームを実行へと導くリーダー',
-    advice: '違いを認識する力（Perspective）を意識的に高めることで、より多くのメンバーを巻き込んだ意思決定が実現できます。'
-  },
-  {
-    id: 'dialogue',
-    name: '談議型',
-    emoji: '🤝',
-    condition: (s) => s.dialogue >= 3.5 && s.perspective >= 3.5,
-    tags: ['相互理解', '傾聴', '共感', '対話重視'],
-    desc: `あなたは対話を通じて互いの理解を深めることが最も得意です。\n\n相手の立場を理解し、違いを受け入れながら、じっくりと共通認識を形成していきます。チームの心理的安全性を高め、メンバー全員が「分かり合えた」と感じられる場を生み出す人物です。`,
-    strengths: ['相手の気持ちや立場を理解できる', '丁寧な対話で信頼関係を築ける', '多様な意見を受け入れられる'],
-    weaknesses: ['対話に時間をかけすぎて決断が遅れることがある', '意思決定の場面でためらいが出ることがある'],
-    role: '相互理解を深め、チームの信頼を育む対話の担い手',
-    advice: '対話で培った共通認識を意思決定につなげる「まとめる力」を意識することで、談議から会議へのスムーズな移行ができます。'
-  },
-  {
-    id: 'executor',
-    name: '実行型',
-    emoji: '⚡',
-    condition: (s) => s.decision >= 3.5 && s.visibility >= 3.5,
-    tags: ['行動力', '問題解決', '目標達成', '即断即決'],
-    desc: `あなたは状況を素早く把握し、迷わず行動に移す力があります。\n\n現状を正確に認識した上で決断し、チームを前進させる推進力がある人物です。課題の本質を見極め、必要な行動を明確にすることで、チームに勢いをもたらします。`,
-    strengths: ['状況判断が速く行動に移しやすい', '目標達成への集中力が高い', '問題を素早く特定して対処できる'],
-    weaknesses: ['プロセスより結果を重視しすぎることがある', '対話や相互理解の時間を省きがちなことがある'],
-    role: 'チームを動かし続けるアクション・ドライバー',
-    advice: '談議力（Dialogue）と違いを認識する力（Perspective）を意識することで、チーム全体を引き込んだ実行力がさらに高まります。'
-  }
+  { condition: s => s.dialogue>=3.5 && s.visibility>=3.5, emoji:'🎯', name:'ファシリテーター型', tags:['状況把握','場の設計','対話促進','全体調整'], desc:`あなたは状況を正確に把握しながら、全員が発言できる場を自然につくり出すことができます。\n\n意見の違いを見える化し、対話を通じて共通認識を形成する——これがあなたの最大の強みです。`, strengths:['現場の状況を素早く把握できる','場の空気を読んで対話を導ける','全員の意見を引き出す力がある'], weaknesses:['自分の意見を主張するのが苦手な場合がある','調整に時間がかかることがある'], role:'チームの対話を設計・推進する調整役', advice:'自分の判断軸も明確にし、必要なときに積極的に意思決定に関与することでさらに貢献が高まります。' },
+  { condition: s => s.coCreation>=3.5 && s.perspective>=3.5, emoji:'🚀', name:'イノベーター型', tags:['多様性尊重','アイデア発想','変革推進','未来志向'], desc:`あなたは多様な視点を取り入れながら、新しい価値を創造することが得意です。\n\n違いを「問題」ではなく「資産」として捉え、誰も考えつかなかったアイデアを生み出す力があります。`, strengths:['多様な意見をアイデアに転換できる','固定観念にとらわれない発想ができる','変化を恐れずチャレンジできる'], weaknesses:['アイデアが先行して実行が追いつかないことがある','意思決定の優先度付けが課題になることがある'], role:'チームに新しい発想と可能性をもたらすアイデアリーダー', advice:'生み出したアイデアを物差し共有（Alignment）でしっかり合わせることで実行につながります。' },
+  { condition: s => s.decision>=3.5 && s.alignment>=3.5, emoji:'🏆', name:'戦略的リーダー型', tags:['合意形成','判断力','目標設定','マネジメント'], desc:`あなたは判断基準を明確にし、チームを意思決定へと導く力があります。\n\n「何を大切にするか」を揃え、そこから逆算して行動を決める。あなたのリーダーシップはチームに方向性と安心感を与えます。`, strengths:['判断基準を明確にして共有できる','優先順位の設定が得意','決定事項を行動につなげられる'], weaknesses:['議論を急ぎすぎることがある','多様な意見を取り込む時間が不足することがある'], role:'方向性を定めてチームを実行へと導くリーダー', advice:'違いを認識する力（Perspective）を意識的に高めることで、より多くのメンバーを巻き込んだ意思決定が実現できます。' },
+  { condition: s => s.dialogue>=3.5 && s.perspective>=3.5, emoji:'🤝', name:'談議型', tags:['相互理解','傾聴','共感','対話重視'], desc:`あなたは対話を通じて互いの理解を深めることが最も得意です。\n\n相手の立場を理解し、違いを受け入れながら、じっくりと共通認識を形成していきます。`, strengths:['相手の気持ちや立場を理解できる','丁寧な対話で信頼関係を築ける','多様な意見を受け入れられる'], weaknesses:['対話に時間をかけすぎて決断が遅れることがある','意思決定の場面でためらいが出ることがある'], role:'相互理解を深め、チームの信頼を育む対話の担い手', advice:'対話で培った共通認識を意思決定につなげる「まとめる力」を意識することで、談議から会議へのスムーズな移行ができます。' },
+  { condition: s => s.decision>=3.5 && s.visibility>=3.5, emoji:'⚡', name:'実行型', tags:['行動力','問題解決','目標達成','即断即決'], desc:`あなたは状況を素早く把握し、迷わず行動に移す力があります。\n\n課題の本質を見極め、必要な行動を明確にすることでチームに勢いをもたらします。`, strengths:['状況判断が速く行動に移しやすい','目標達成への集中力が高い','問題を素早く特定して対処できる'], weaknesses:['プロセスより結果を重視しすぎることがある','対話や相互理解の時間を省きがちなことがある'], role:'チームを動かし続けるアクション・ドライバー', advice:'談議力（Dialogue）と違いを認識する力（Perspective）を意識することで、チーム全体を引き込んだ実行力がさらに高まります。' }
 ];
+const DEFAULT_TYPE = { emoji:'🌟', name:'バランス型', tags:['バランス型','総合力','柔軟性','適応力'], desc:`あなたは6つの能力をバランスよく持っています。\n\n状況に応じて必要な力を使い分ける柔軟性があります。`, strengths:['状況に応じた柔軟な対応ができる','特定の弱点が少なく安定している','さまざまなチームで活躍できる'], weaknesses:['突出した個性がないと感じることがある','自分の専門性やスタイルを確立したい'], role:'状況に応じて役割を変えられる万能プレイヤー', advice:'自分が最も共感できる能力を1つ選び、意識的に伸ばすことで独自のスタイルを確立していきましょう。' };
 
-const DEFAULT_TYPE = {
-  id: 'balanced',
-  name: 'バランス型',
-  emoji: '🌟',
-  tags: ['バランス型', '総合力', '柔軟性', '適応力'],
-  desc: `あなたは6つの能力をバランスよく持っています。\n\n特定の強みが突出しているというよりも、状況に応じて必要な力を使い分ける柔軟性があります。チームのさまざまな役割をサポートできる総合的な力の持ち主です。`,
-  strengths: ['状況に応じた柔軟な対応ができる', '特定の弱点が少なく安定している', 'さまざまなチームで活躍できる'],
-  weaknesses: ['突出した個性がないと感じることがある', '自分の専門性やスタイルを確立したい'],
-  role: '状況に応じて役割を変えられる万能プレイヤー',
-  advice: 'まずは自分が最も共感できる能力を1つ選び、そこを意識的に伸ばすことで、独自のスタイルを確立していきましょう。'
-};
+let answers = {}, radarChart = null;
 
-// ─────────────────────────────────────────
-//  State
-// ─────────────────────────────────────────
-let currentStep = 0; // 0 = intro, 1-6 = categories, 7 = results
-let answers = {}; // { 'visibility_0': 3, ... }
-
-// ─────────────────────────────────────────
-//  Init
-// ─────────────────────────────────────────
-function buildQuestionScreens() {
+function buildScreens() {
   const wrap = document.getElementById('questionScreens');
-  CATEGORIES.forEach((cat, ci) => {
-    const screen = document.createElement('div');
-    screen.className = 'screen';
-    screen.id = `screen-cat-${ci}`;
-
-    let questionsHtml = cat.questions.map((q, qi) => `
-      <div class="q-card" id="qcard-${ci}-${qi}">
-        <div class="q-text">${q}</div>
-        <div class="scale-labels">
-          <span>全くそう思わない</span>
-          <span>強くそう思う</span>
-        </div>
-        <div class="scale-buttons">
-          ${[1,2,3,4,5].map(v => `
-            <button class="scale-btn"
-              style="--active-color:${cat.color}"
-              onclick="selectAnswer(${ci}, ${qi}, ${v}, this)"
-              data-ci="${ci}" data-qi="${qi}" data-val="${v}">
-              ${v}
-            </button>
-          `).join('')}
-        </div>
-      </div>
-    `).join('');
-
-    screen.innerHTML = `
-      <div class="q-header">
-        <div class="q-cat-icon" style="background:${cat.bg}; font-size:26px; display:flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:14px;">
-          ${cat.icon}
-        </div>
-        <div class="q-cat-meta">
+  CATS.forEach((cat, ci) => {
+    const s = document.createElement('div');
+    s.className = 'screen'; s.id = `screen-cat-${ci}`;
+    s.innerHTML = `
+      <div class="q-header anim">
+        <div class="q-cat-icon" style="background:${cat.bg}">${cat.icon}</div>
+        <div>
           <div class="q-cat-badge" style="color:${cat.color}">${ci+1}/6 · ${cat.nameEn}</div>
           <div class="q-cat-name">${cat.name}</div>
-          <div class="q-cat-desc">${cat.description}</div>
+          <div class="q-cat-desc">${cat.desc}</div>
         </div>
       </div>
-      ${questionsHtml}
+      ${cat.qs.map((q,qi)=>`
+        <div class="q-card anim" id="qcard-${ci}-${qi}" style="animation-delay:${0.05*qi}s">
+          <div class="q-prefix">私は…</div>
+          <div class="q-text">${q}</div>
+          <div class="scale-legend"><span>全くそう思わない</span><span>強くそう思う</span></div>
+          <div class="scale-buttons">
+            ${[1,2,3,4,5].map(v=>`<button class="scale-btn" style="--active-color:${cat.color}" onclick="selectAnswer(${ci},${qi},${v},this)">${v}</button>`).join('')}
+          </div>
+        </div>
+      `).join('')}
       <div class="btn-row">
-        <button class="btn-secondary" onclick="goStep(${ci})">← 戻る</button>
-        <button class="btn-primary" id="next-btn-${ci}" onclick="nextStep(${ci})" disabled>
-          ${ci < CATEGORIES.length - 1 ? '次へ →' : '結果を見る →'}
-        </button>
-      </div>
-    `;
-    wrap.appendChild(screen);
+        <button class="btn-ghost" onclick="goBack(${ci})">← 戻る</button>
+        <button class="btn-primary" id="next-${ci}" disabled onclick="nextStep(${ci})">${ci<CATS.length-1?'次へ →':'結果を見る →'}</button>
+      </div>`;
+    wrap.appendChild(s);
   });
-
-  // Progress steps
-  const stepsEl = document.getElementById('progressSteps');
-  CATEGORIES.forEach((cat, i) => {
-    const el = document.createElement('div');
-    el.className = 'progress-step';
-    el.id = `pstep-${i}`;
-    el.textContent = cat.name.length > 4 ? cat.name.slice(0,4) : cat.name;
-    stepsEl.appendChild(el);
-  });
+  const steps = document.getElementById('progressSteps');
+  CATS.forEach((c,i)=>{ const el=document.createElement('div'); el.className='progress-step'; el.id=`pstep-${i}`; el.textContent=c.name.slice(0,4); steps.appendChild(el); });
 }
 
-// ─────────────────────────────────────────
-//  Navigation
-// ─────────────────────────────────────────
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
 
-function updateProgress(step) {
-  const wrap = document.getElementById('progressWrap');
-  if (step === 0 || step > CATEGORIES.length) {
-    wrap.classList.remove('visible');
-    return;
-  }
+function updateProgress(step){
+  const wrap=document.getElementById('progressWrap');
+  if(step<1||step>CATS.length){wrap.classList.remove('visible');return;}
   wrap.classList.add('visible');
-  const pct = ((step - 1) / CATEGORIES.length) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.querySelectorAll('.progress-step').forEach((el, i) => {
-    el.className = 'progress-step';
-    if (i < step - 1) el.classList.add('done');
-    else if (i === step - 1) el.classList.add('active');
-  });
+  const pct=Math.round(((step-1)/CATS.length)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressPct').textContent=pct+'%';
+  document.getElementById('progressNum').textContent=step;
+  document.querySelectorAll('.progress-step').forEach((el,i)=>{ el.className='progress-step'+(i<step-1?' done':i===step-1?' active':''); });
 }
 
-function startDiagnosis() {
-  currentStep = 1;
-  updateProgress(1);
-  showScreen('screen-cat-0');
-}
+function startDiagnosis(){updateProgress(1);showScreen('screen-cat-0');}
+function goBack(ci){ if(ci===0){updateProgress(0);showScreen('screen-intro');}else{updateProgress(ci);showScreen(`screen-cat-${ci-1}`);} }
+function nextStep(ci){ if(ci<CATS.length-1){updateProgress(ci+2);showScreen(`screen-cat-${ci+1}`);}else showResults(); }
 
-function goStep(fromCi) {
-  if (fromCi === 0) {
-    currentStep = 0;
-    updateProgress(0);
-    showScreen('screen-intro');
-  } else {
-    currentStep = fromCi;
-    updateProgress(fromCi);
-    showScreen(`screen-cat-${fromCi - 1}`);
-  }
-}
-
-function nextStep(ci) {
-  if (ci < CATEGORIES.length - 1) {
-    currentStep = ci + 2;
-    updateProgress(ci + 2);
-    showScreen(`screen-cat-${ci + 1}`);
-  } else {
-    showResults();
-  }
-}
-
-// ─────────────────────────────────────────
-//  Answer handling
-// ─────────────────────────────────────────
-function selectAnswer(ci, qi, val, btn) {
-  const key = `${ci}_${qi}`;
-  answers[key] = val;
-
-  // Update button styles in this question's group
-  const btns = btn.parentElement.querySelectorAll('.scale-btn');
-  btns.forEach(b => b.classList.remove('selected'));
+function selectAnswer(ci,qi,val,btn){
+  answers[`${ci}_${qi}`]=val;
+  btn.parentElement.querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
-
-  // Check if all 4 questions in this category are answered
-  checkCategoryComplete(ci);
+  document.getElementById(`qcard-${ci}-${qi}`).classList.add('answered');
+  const done=CATS[ci].qs.every((_,i)=>answers[`${ci}_${i}`]!==undefined);
+  document.getElementById(`next-${ci}`).disabled=!done;
 }
 
-function checkCategoryComplete(ci) {
-  const allAnswered = CATEGORIES[ci].questions.every((_, qi) => {
-    return answers[`${ci}_${qi}`] !== undefined;
-  });
-  const btn = document.getElementById(`next-btn-${ci}`);
-  if (btn) btn.disabled = !allAnswered;
+function calcScores(){
+  return Object.fromEntries(CATS.map((c,ci)=>{
+    const total=c.qs.reduce((s,_,qi)=>s+(answers[`${ci}_${qi}`]||1),0);
+    return [c.id, parseFloat((total/c.qs.length).toFixed(2))];
+  }));
 }
 
-// ─────────────────────────────────────────
-//  Score calculation
-// ─────────────────────────────────────────
-function calculateScores() {
-  const scores = {};
-  CATEGORIES.forEach((cat, ci) => {
-    let total = 0;
-    cat.questions.forEach((_, qi) => {
-      total += (answers[`${ci}_${qi}`] || 1);
-    });
-    scores[cat.id] = parseFloat((total / cat.questions.length).toFixed(2));
-  });
-  return scores;
+function getMI(scores){ return parseFloat((Object.values(scores).reduce((a,b)=>a+b,0)/6).toFixed(2)); }
+function getStars(s){ const f=Math.floor(s),h=s-f>=0.5?1:0; return '★'.repeat(f)+(h?'☆':'')+'✩'.repeat(5-f-h); }
+function getRank(s){ if(s>=4.5)return 'エキスパート'; if(s>=3.8)return 'アドバンスト'; if(s>=3.0)return 'インターミディエイト'; if(s>=2.0)return 'ビギナー'; return 'スターター'; }
+function getType(s){ return TYPES.find(t=>t.condition(s))||DEFAULT_TYPE; }
+function getLevel(v){ return v>=4.0?'high':v>=2.8?'mid':'low'; }
+
+function toggleAcademic(id){ document.getElementById(`acc-${id}`).classList.toggle('open'); }
+
+function buildAcademic(scores){
+  const items = CATS.map(cat=>{
+    const sc=scores[cat.id], lv=getLevel(sc), a=cat.ac;
+    return `
+      <div class="academic-item" id="acc-${cat.id}">
+        <button class="academic-toggle" onclick="toggleAcademic('${cat.id}')">
+          <div class="academic-dot" style="background:${cat.color}"></div>
+          <div class="academic-toggle-text">
+            <div class="academic-cat-name">${cat.icon} ${cat.name} — <span style="color:${cat.color};font-weight:900;">${sc.toFixed(2)}点</span></div>
+            <div class="academic-cat-sub">${a.t1.name.split('（')[0]} · ${a.t2.name.split('（')[0]}</div>
+          </div>
+          <div class="academic-arrow">▼</div>
+        </button>
+        <div class="academic-body">
+          <div class="theory-block">
+            <div class="theory-title">${a.t1.name}<span class="theory-badge">${a.t1.badge}</span></div>
+            <div class="theory-text">${a.t1.text}</div>
+            <div class="theory-ref">${a.t1.ref}</div>
+          </div>
+          <div class="theory-block" style="margin-top:18px">
+            <div class="theory-title">${a.t2.name}<span class="theory-badge">${a.t2.badge}</span></div>
+            <div class="theory-text">${a.t2.text}</div>
+            <div class="theory-ref">${a.t2.ref}</div>
+          </div>
+          <div class="score-context ${lv}"><strong>あなたのスコア（${sc.toFixed(2)}点）：</strong> ${a[lv]}</div>
+        </div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="academic-intro">
+      <div class="academic-intro-title">📚 学術的背景について</div>
+      <div class="academic-intro-text">MIERUBA Indexの6つの能力軸は、組織心理学・認知科学・対話哲学・経営学の知見をもとに設計されています。各軸をクリックして理論的根拠とあなたのスコアの意味を確認してください。</div>
+    </div>
+    <div class="academic-accordion">${items}</div>`;
 }
 
-function getMIScore(scores) {
-  const vals = Object.values(scores);
-  return parseFloat((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(2));
-}
+function buildReport(type, scores){
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const topCat=CATS.find(c=>c.id===sorted[0][0]), botCat=CATS.find(c=>c.id===sorted[sorted.length-1][0]);
+  const mi=getMI(scores);
+  return `MIスコア ${mi.toFixed(2)}点、タイプ「${type.name}」の診断結果から、以下の特性が読み取れます。
 
-function getStars(score) {
-  const full = Math.floor(score);
-  const half = score - full >= 0.5 ? 1 : 0;
-  const empty = 5 - full - half;
-  return '★'.repeat(full) + (half ? '☆' : '') + '✩'.repeat(empty);
-}
+【最大の強み】
+${topCat.icon} ${topCat.name}（${scores[topCat.id].toFixed(2)}点）が最も高く評価されています。この能力はMIERUBAが定義する「談議」において中心的な役割を果たし、チームの共通認識形成に直接貢献します。
 
-function getRank(score) {
-  if (score >= 4.5) return 'エキスパート';
-  if (score >= 3.8) return 'アドバンスト';
-  if (score >= 3.0) return 'インターミディエイト';
-  if (score >= 2.0) return 'ビギナー';
-  return 'スターター';
-}
-
-function determineType(scores) {
-  for (const type of TYPES) {
-    if (type.condition(scores)) return type;
-  }
-  return DEFAULT_TYPE;
-}
-
-function getTopCategories(scores, n = 2) {
-  return Object.entries(scores)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, n)
-    .map(([id]) => CATEGORIES.find(c => c.id === id));
-}
-
-function getBottomCategories(scores, n = 1) {
-  return Object.entries(scores)
-    .sort((a, b) => a[1] - b[1])
-    .slice(0, n)
-    .map(([id]) => CATEGORIES.find(c => c.id === id));
-}
-
-// ─────────────────────────────────────────
-//  AI Analysis text
-// ─────────────────────────────────────────
-function generateAnalysis(type, scores, tops, bottoms) {
-  const topNames = tops.map(c => c.name).join('・');
-  const bottomName = bottoms[0].name;
-  const mi = getMIScore(scores);
-
-  const openers = [
-    `あなたのMIスコアは${mi.toFixed(2)}点です。`,
-    `診断結果から、あなたは${type.name}であることが分かりました。`,
-    `6つの能力の分析から、あなたの認識合わせスタイルが見えてきました。`
-  ];
-
-  const body = `
-【強み】
-${topNames}が特に高く評価されています。これはMIERUBAが重視する「談議」の核心に近い能力です。チームの中で共通認識を形成する際に、あなたは自然とリーダー的な役割を担う傾向があります。
-
-【改善ポイント】
-${bottomName}は相対的に伸び代があります。この能力を高めることで、談議の質が一段階上がり、会議の生産性もさらに向上するでしょう。
+【成長の余地】
+${botCat.icon} ${botCat.name}（${scores[botCat.id].toFixed(2)}点）は相対的に伸び代があります。この能力を高めることで談議の質が一段階向上し、会議の生産性も改善されるでしょう。
 
 【チームでの役割】
 ${type.role}
 
-【次のステップ】
-${type.advice}
-  `.trim();
+【MIERUBAとの親和性】
+あなたの強みである「${topCat.name}」は「見えるから、分かる。分かるから、決められる。」というMIERUBAの哲学において、最初の「見える」段階を担う能力です。談議の場でこの強みを意識的に発揮することが、チーム全体の認識合わせを加速させます。
 
-  return body;
+【次のアクション】
+${type.advice}`;
 }
 
-// ─────────────────────────────────────────
-//  Results rendering
-// ─────────────────────────────────────────
-let radarChart = null;
-
-function showResults() {
-  const scores = calculateScores();
-  const mi = getMIScore(scores);
-  const stars = getStars(mi);
-  const rank = getRank(mi);
-  const type = determineType(scores);
-  const tops = getTopCategories(scores, 2);
-  const bottoms = getBottomCategories(scores, 1);
-  const analysis = generateAnalysis(type, scores, tops, bottoms);
-
-  updateProgress(CATEGORIES.length + 1);
+function showResults(){
+  const scores=calcScores(), mi=getMI(scores), type=getType(scores);
+  updateProgress(CATS.length+1);
   document.getElementById('progressWrap').classList.remove('visible');
 
-  const scoresGridHtml = CATEGORIES.map(cat => {
-    const score = scores[cat.id];
-    const pct = (score / 5) * 100;
-    return `
-      <div class="score-item">
-        <div class="score-item-dot" style="background:${cat.color}"></div>
-        <div class="score-item-inner">
-          <div class="score-item-name">${cat.icon} ${cat.name}</div>
-          <div class="score-item-val" style="color:${cat.color}">${score.toFixed(2)}</div>
-          <div class="score-item-bar-bg">
-            <div class="score-item-bar" style="background:${cat.color}; width:${pct}%"></div>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
+  const scoresGrid=CATS.map(cat=>`
+    <div class="score-item">
+      <div class="score-item-header"><div class="score-dot" style="background:${cat.color}"></div><div class="score-name">${cat.icon} ${cat.name}</div></div>
+      <div class="score-val" style="color:${cat.color}">${scores[cat.id].toFixed(2)}</div>
+      <div class="score-bar-bg"><div class="score-bar" style="background:${cat.color};width:${(scores[cat.id]/5)*100}%"></div></div>
+    </div>`).join('');
 
-  const strengthsHtml = type.strengths.map(s => `
-    <div class="analysis-item">
-      <div class="analysis-item-icon" style="background:rgba(16,185,129,0.12); color:#10b981;">✓</div>
-      <span>${s}</span>
-    </div>
-  `).join('');
-
-  const weaknessesHtml = type.weaknesses.map(w => `
-    <div class="analysis-item">
-      <div class="analysis-item-icon" style="background:rgba(239,68,68,0.12); color:#ef4444;">△</div>
-      <span>${w}</span>
-    </div>
-  `).join('');
-
-  const tagsHtml = type.tags.map(t => `<span class="type-tag">${t}</span>`).join('');
-
-  const resultHtml = `
-    <div class="result-hero animate-in">
-      <div class="result-title-label">MIERUBA INDEX 診断結果</div>
+  document.getElementById('screen-results').innerHTML = `
+    <div class="result-hero anim">
+      <div class="result-eyebrow">MIERUBA INDEX · 診断結果</div>
       <div class="result-mi-label">あなたのMIスコア</div>
-      <div>
-        <span class="result-score-big count-anim">${mi.toFixed(2)}</span>
-        <span class="result-score-denom"> / 5.00</span>
-      </div>
-      <div class="result-stars">${stars}</div>
-      <div class="result-rank">${rank}</div>
+      <div class="result-score-row"><span class="result-score-num">${mi.toFixed(2)}</span><span class="result-score-denom"> / 5.00</span></div>
+      <div class="result-stars">${getStars(mi)}</div>
+      <div class="result-rank">${getRank(mi)}</div>
     </div>
 
-    <div class="section-title">レーダーチャート</div>
-    <div class="chart-card animate-in">
-      <div class="chart-wrap">
-        <canvas id="radarChart"></canvas>
-      </div>
-    </div>
+    <div class="section-heading">レーダーチャート</div>
+    <div class="chart-card anim d1"><div class="chart-wrap"><canvas id="radarChart"></canvas></div></div>
 
-    <div class="section-title">カテゴリー別スコア</div>
-    <div class="scores-grid animate-in">
-      ${scoresGridHtml}
-    </div>
+    <div class="section-heading">カテゴリー別スコア</div>
+    <div class="scores-grid anim d1">${scoresGrid}</div>
 
-    <div class="section-title">あなたのタイプ</div>
-    <div class="type-card animate-in">
-      <div class="type-label">Your MIERUBA Type</div>
-      <div class="type-name">${type.emoji} <span>${type.name}</span></div>
+    <div class="section-heading">あなたのタイプ</div>
+    <div class="type-card anim d2">
+      <div class="type-eyebrow">Your MIERUBA Type</div>
+      <div class="type-name">${type.emoji} <em>${type.name}</em></div>
       <div class="type-desc">${type.desc}</div>
-      <div class="type-tags">${tagsHtml}</div>
+      <div class="type-tags">${type.tags.map(t=>`<span class="type-tag">${t}</span>`).join('')}</div>
     </div>
 
-    <div class="section-title">強み・改善ポイント</div>
-    <div class="analysis-card animate-in">
-      <h3>💪 あなたの強み</h3>
-      ${strengthsHtml}
+    <div class="section-heading">強み・改善ポイント</div>
+    <div class="analysis-card anim">
+      <div class="analysis-card-title">💪 あなたの強み</div>
+      ${type.strengths.map(s=>`<div class="analysis-row"><div class="analysis-icon" style="background:rgba(42,157,157,0.1);color:var(--teal)">✓</div><span>${s}</span></div>`).join('')}
     </div>
-    <div class="analysis-card animate-in">
-      <h3>🌱 さらに伸ばせる点</h3>
-      ${weaknessesHtml}
+    <div class="analysis-card anim d1">
+      <div class="analysis-card-title">🌱 さらに伸ばせる点</div>
+      ${type.weaknesses.map(w=>`<div class="analysis-row"><div class="analysis-icon" style="background:rgba(200,90,62,0.1);color:#c85a3e">△</div><span>${w}</span></div>`).join('')}
     </div>
-    <div class="analysis-card animate-in">
-      <h3>💡 アドバイス</h3>
-      <div class="analysis-item">
-        <div class="analysis-item-icon" style="background:rgba(43,74,203,0.1); color:#2b4acb;">→</div>
-        <span>${type.advice}</span>
-      </div>
+    <div class="analysis-card anim d2">
+      <div class="analysis-card-title">💡 アドバイス</div>
+      <div class="analysis-row"><div class="analysis-icon" style="background:rgba(26,107,107,0.1);color:var(--teal)">→</div><span>${type.advice}</span></div>
     </div>
 
-    <div class="section-title">AI分析レポート</div>
-    <div class="ai-card animate-in">
-      <div class="ai-card-header">
-        <div class="ai-badge">MI ANALYSIS</div>
-        <div class="ai-card-title">詳細分析</div>
-      </div>
-      <div class="ai-text">${analysis}</div>
+    <div class="section-heading">学術的根拠</div>
+    ${buildAcademic(scores)}
+
+    <div class="section-heading">総合分析レポート</div>
+    <div class="ai-card anim">
+      <div class="ai-card-header"><div class="ai-badge">MI ANALYSIS</div><div class="ai-title">詳細分析レポート</div></div>
+      <div class="ai-text">${buildReport(type, scores)}</div>
     </div>
 
-    <div class="restart-area">
-      <button class="restart-btn" onclick="restartDiagnosis()">もう一度診断する</button>
-    </div>
+    <div class="restart-area"><button class="restart-btn" onclick="restartDiagnosis()">↩ もう一度診断する</button></div>
+    <div class="result-footer">Powered by <a href="https://mieruba.net/" target="_blank">MIERUBA</a> &nbsp;·&nbsp; 見えるから、分かる。分かるから、決められる。</div>
   `;
 
-  const resultsScreen = document.getElementById('screen-results');
-  resultsScreen.innerHTML = resultHtml;
   showScreen('screen-results');
-
-  // Draw radar chart
-  setTimeout(() => {
-    drawRadar(scores);
-  }, 100);
+  setTimeout(()=>drawRadar(scores), 150);
 }
 
-function drawRadar(scores) {
-  const ctx = document.getElementById('radarChart');
-  if (!ctx) return;
-
-  if (radarChart) {
-    radarChart.destroy();
-    radarChart = null;
-  }
-
-  const labels = CATEGORIES.map(c => c.name);
-  const data = CATEGORIES.map(c => scores[c.id]);
-  const colors = CATEGORIES.map(c => c.color);
-
-  radarChart = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'MI Score',
-        data: data,
-        backgroundColor: 'rgba(43,74,203,0.15)',
-        borderColor: '#2b4acb',
-        borderWidth: 2.5,
-        pointBackgroundColor: colors,
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: 6,
-        pointHoverRadius: 8
-      }]
+function drawRadar(scores){
+  const ctx=document.getElementById('radarChart');
+  if(!ctx)return;
+  if(radarChart){radarChart.destroy();radarChart=null;}
+  radarChart=new Chart(ctx,{
+    type:'radar',
+    data:{
+      labels:CATS.map(c=>c.name),
+      datasets:[{label:'MI Score',data:CATS.map(c=>scores[c.id]),backgroundColor:'rgba(26,107,107,0.15)',borderColor:'#1A6B6B',borderWidth:2.5,pointBackgroundColor:CATS.map(c=>c.color),pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:6,pointHoverRadius:8}]
     },
-    options: {
-      responsive: true,
-      scales: {
-        r: {
-          min: 0,
-          max: 5,
-          ticks: {
-            stepSize: 1,
-            display: false
-          },
-          grid: {
-            color: 'rgba(0,0,0,0.08)'
-          },
-          angleLines: {
-            color: 'rgba(0,0,0,0.08)'
-          },
-          pointLabels: {
-            font: {
-              size: 12,
-              family: "'Hiragino Kaku Gothic ProN', sans-serif",
-              weight: '700'
-            },
-            color: '#0f1740'
-          }
-        }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => `${ctx.label}: ${ctx.raw.toFixed(2)}点`
-          }
-        }
-      },
-      animation: {
-        duration: 800,
-        easing: 'easeInOutQuart'
-      }
-    }
+    options:{responsive:true,scales:{r:{min:0,max:5,ticks:{stepSize:1,display:false},grid:{color:'rgba(0,0,0,0.07)'},angleLines:{color:'rgba(0,0,0,0.07)'},pointLabels:{font:{size:12,family:"'Noto Sans JP',sans-serif",weight:'700'},color:'#1a2e2e'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw.toFixed(2)}点`}}},animation:{duration:900,easing:'easeInOutQuart'}}
   });
 }
 
-function restartDiagnosis() {
-  answers = {};
-  currentStep = 0;
-
-  // Reset all button states
-  document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
-  document.querySelectorAll('[id^="next-btn-"]').forEach(b => b.disabled = true);
-
-  updateProgress(0);
-  showScreen('screen-intro');
+function restartDiagnosis(){
+  answers={};
+  document.querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('answered'));
+  document.querySelectorAll('[id^="next-"]').forEach(b=>b.disabled=true);
+  updateProgress(0); showScreen('screen-intro');
 }
 
-// ─────────────────────────────────────────
-//  Boot
-// ─────────────────────────────────────────
-buildQuestionScreens();
+buildScreens();
 </script>
 </body>
 </html>
